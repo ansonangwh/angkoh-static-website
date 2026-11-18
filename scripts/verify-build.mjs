@@ -14,6 +14,8 @@ for (const file of pages) {
   const publishedUrl = new URL(prefix + file.replace(/index\.html$/, ''), config.site);
   if (!page.includes('id="content"') || !page.includes('<h1')) problems.push(file + ' misses the main landmark or heading');
   for (const [, property, value] of page.matchAll(/\b(href|src)="([^"]+)"/g)) {
+    if (property === 'href' && /^tel:\+?[0-9]+$/i.test(value)) continue;
+    if (property === 'href' && /^https:\/\/(?:www\.linkedin\.com\/sharing\/share-offsite\/\?url=|www\.facebook\.com\/sharer\/sharer\.php\?u=)/.test(value)) continue;
     if (value.startsWith('//') || /^https?:/i.test(value)) {
       problems.push(file + ' includes an external ' + property + ': ' + value);
       continue;
@@ -37,6 +39,6 @@ const contact = readFileSync(resolve(root, 'contact/index.html'), 'utf8');
 assert.match(contact, /Demonstration form/);
 assert.doesNotMatch(contact, /<form[^>]+(?:action|method)=/);
 assert.doesNotMatch(contact, /<(?:input|textarea)[^>]+\bname=/);
-assert.ok(pages.length >= 19, 'Expected at least 19 built HTML pages');
+assert.equal(pages.length, 13, 'Expected the six main pages, six detail pages, and a 404 page');
 assert.equal(problems.length, 0, problems.join('\n'));
 console.log('Verified ' + pages.length + ' pages and ' + checked + ' internal link and asset references under ' + prefix);

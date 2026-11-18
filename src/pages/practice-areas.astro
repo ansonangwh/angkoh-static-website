@@ -1,12 +1,11 @@
 ---
 import Site from '../layouts/Site.astro';
-import Banner from '../components/Banner.astro';
-import { practices, url } from '../content';
+import PracticeList from '../components/PracticeList.astro';
 ---
 <Site title="Practice Areas">
-  <Banner variant="practice" />
-  <section class="interior wrap prose">
-    <h1 class="eyebrow">Practice Areas</h1>
-    <ul class="practice-links">{practices.map(item => <li><a href={url(item.slug + '/')}>{item.name}</a></li>)}</ul>
+  <section class="wrap interior narrow">
+    <h1>Practice areas</h1>
+    <p>These sample pages show what each area could cover and what to bring to a first meeting.</p>
+    <PracticeList />
   </section>
 </Site>

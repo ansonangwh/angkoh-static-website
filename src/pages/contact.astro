@@ -1,22 +1,16 @@
 ---
 import Site from '../layouts/Site.astro';
-import Banner from '../components/Banner.astro';
 import ContactForm from '../components/ContactForm.astro';
 ---
 <Site title="Contact">
-  <Banner variant="contact" />
-  <section class="interior wrap split contact">
-    <div>
-      <div class="contact-icons" aria-label="Social links placeholder"><span aria-hidden="true">f</span><span aria-hidden="true">𝕏</span><span aria-hidden="true">▶</span></div>
-      <h1 class="eyebrow">Contact</h1>
-      <address>Sample office address<br />Jalan Tun Razak, Kuala Lumpur</address>
-      <ul class="contact-list"><li>Telephone placeholder</li><li>Fax placeholder</li><li>Email placeholder</li></ul>
-      <h2 class="eyebrow">Business hours</h2>
-      <p>Sample hours · Monday to Friday, 08:00–18:00</p>
+  <section class="wrap interior contact">
+    <div class="prose">
+      <h1>Contact</h1>
+      <address class="office-details">
+        <p>H-7-3 (3rd Floor),<br />Pusat Perdagangan Bandar Bukit Jalil,<br />Persiaran Jalil 2,<br />57000 Kuala Lumpur.</p>
+        <p>Contact No: <a href="tel:+60327753133">03-2775 3133</a></p>
+      </address>
     </div>
     <ContactForm />
   </section>
-  <div class="wrap contact-visuals">
-    <div class="map-preview"><span>Map placeholder</span><small>External map integration is disabled in this demo.</small></div>
-  </div>
 </Site>

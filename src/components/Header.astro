@@ -4,79 +4,30 @@ import { navigation, url } from '../content';
 const current = Astro.url.pathname;
 ---
 <header class="site-header">
-  <div class="header-inner">
+  <div class="wrap header-inner">
     <Brand />
-    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span aria-hidden="true">☰</span></button>
-    <nav id="main-nav" class="main-nav" aria-label="Main navigation">
-      <ul>
-        {navigation.map(({ label, slug, children }) => {
-          const href = url(slug + '/');
-          const active = current === href || children?.some(item => current === url(item.slug + '/'));
-          return <li class:list={[{ active, 'has-menu': children }]}>
-            <div class="nav-item">
-              <a href={href} aria-current={current === href ? 'page' : undefined}>{label}</a>
-              {children && <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls={'menu-' + slug} aria-label={'Toggle ' + label + ' submenu'}><span class="chevron" aria-hidden="true"></span></button>}
-            </div>
-            {children && <ul class="submenu" id={'menu-' + slug}>
-              {children.map(item => <li><a href={url(item.slug + '/')} aria-current={current === url(item.slug + '/') ? 'page' : undefined}>{item.label}</a></li>)}
-            </ul>}
-          </li>;
-        })}
-      </ul>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button" hidden>Menu</button>
+    <nav id="main-nav" aria-label="Main navigation">
+      {navigation.map(({ label, path }) => <a href={url(path)} aria-current={current === url(path) ? 'page' : undefined}>{label}</a>)}
+      <a class="header-contact" href={url('contact/')} aria-current={current === url('contact/') ? 'page' : undefined}>Contact</a>
     </nav>
   </div>
 </header>
 <script>
-  const nav = document.querySelector<HTMLElement>('.main-nav')!;
-  const mobileToggle = document.querySelector<HTMLButtonElement>('.mobile-toggle')!;
-  const menus = [...nav.querySelectorAll<HTMLElement>('.has-menu')];
-  const desktopHover = matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
-
-  function setMenu(menu: HTMLElement, open: boolean) {
-    menu.classList.toggle('open', open);
-    menu.querySelector('button')!.setAttribute('aria-expanded', String(open));
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
+  const header = toggle.closest('header')!;
+  const nav = header.querySelector('nav')!;
+  function setOpen(open: boolean) {
+    toggle.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('open', open);
   }
-
-  function openMenu(menu: HTMLElement) {
-    menus.forEach(item => setMenu(item, item === menu));
-  }
-
-  function setNav(open: boolean) {
-    nav.classList.toggle('mobile-open', open);
-    mobileToggle.setAttribute('aria-expanded', String(open));
-    mobileToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    if (!open) menus.forEach(menu => setMenu(menu, false));
-  }
-
-  mobileToggle.addEventListener('click', () => setNav(!nav.classList.contains('mobile-open')));
-  menus.forEach(menu => {
-    menu.querySelector('button')!.addEventListener('click', () => {
-      if (menu.classList.contains('open')) setMenu(menu, false);
-      else openMenu(menu);
-    });
-    menu.addEventListener('pointerenter', () => {
-      if (desktopHover.matches) openMenu(menu);
-    });
-    menu.addEventListener('pointerleave', () => {
-      if (desktopHover.matches && !menu.contains(document.activeElement)) setMenu(menu, false);
-    });
-    menu.addEventListener('focusout', event => {
-      if (matchMedia('(min-width: 901px)').matches && !menu.contains(event.relatedTarget as Node)) setMenu(menu, false);
-    });
-  });
-  document.addEventListener('click', event => {
-    if (!(event.target as Element).closest('.site-header')) setNav(false);
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key !== 'Escape') return;
-    const open = menus.find(menu => menu.classList.contains('open'));
-    if (open) {
-      setMenu(open, false);
-      if (open.contains(document.activeElement)) open.querySelector('button')!.focus();
-    } else if (nav.classList.contains('mobile-open')) {
-      setNav(false);
-      mobileToggle.focus();
+  toggle.hidden = false;
+  header.classList.add('enhanced');
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') === 'false'));
+  header.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
     }
   });
-  matchMedia('(min-width: 901px)').addEventListener('change', () => setNav(false));
 </script>

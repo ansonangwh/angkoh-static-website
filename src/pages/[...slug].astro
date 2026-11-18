@@ -1,67 +1,32 @@
 ---
 import Site from '../layouts/Site.astro';
-import Banner from '../components/Banner.astro';
-import { formatDate, news, partners, practices, url } from '../content';
+import { updates, practices, url } from '../content';
 
 export function getStaticPaths() {
   return [
-    ...partners.map(item => ({ params: { slug: item.slug }, props: { type: 'partner' as const, item } })),
-    ...practices.map(item => ({ params: { slug: item.slug }, props: { type: 'practice' as const, item } })),
-    ...news.map(item => ({ params: { slug: item.slug }, props: { type: 'news' as const, item } })),
+    ...practices.map(item => ({ params: { slug: 'practice-areas/' + item.slug }, props: { kind: 'practice' as const, item } })),
+    ...updates.map(item => ({ params: { slug: 'news-events/' + item.slug }, props: { kind: 'insight' as const, item } })),
   ];
 }
 
 const page = Astro.props;
-const title = page.type === 'news' ? page.item.title : page.item.name;
+const title = page.kind === 'practice' ? page.item.name : page.item.title;
+const section = page.kind === 'practice' ? { path: 'practice-areas/', label: 'Practice areas' } : { path: 'news-events/', label: 'News & Events' };
 ---
 <Site title={title}>
-  {page.type === 'partner' && <>
-    <Banner variant="profile" />
-    <section class="profile-area">
-      <div class="wrap profile-grid">
-        <div class="portrait"><span>Portrait placeholder</span></div>
-        <article class="profile-card prose">
-          <h1 class="eyebrow">{page.item.name}</h1>
-          <p class="eyebrow smaller">{page.item.area}</p>
-          {page.item.paragraphs.map(paragraph => <p>{paragraph}</p>)}
-          {page.item.topics.map(topic => <div class="profile-topic"><h2>{topic}</h2><p>Experience and directory commentary placeholder.</p></div>)}
-          <h2>Languages and Qualifications</h2>
-          <p>Professional details placeholder.</p>
-          <a href={url('our-partners/')}>View all partners</a>
-        </article>
-      </div>
-    </section>
-  </>}
-  {page.type === 'practice' && <>
-    <Banner variant="practice" />
-    <section class="interior practice-grid wrap">
-      <aside>
-        <h1 class="eyebrow">Practice Areas</h1>
-        <ul class="practice-links">
-          {practices.map(item => <li><a href={url(item.slug + '/')} aria-current={item.slug === page.item.slug ? 'page' : undefined}>{item.name}</a></li>)}
-        </ul>
-      </aside>
-      <article class="prose">
-        <h2 class="eyebrow">{page.item.name}</h2>
-        {page.item.paragraphs.map(paragraph => <p>{paragraph}</p>)}
-        <ul>{page.item.services.map(service => <li>{service}</li>)}</ul>
-        <figure class="photo-block"><img src={url('assets/columns.webp')} alt="" loading="lazy" /><figcaption class="image-note">Practice image placeholder</figcaption></figure>
-        {page.item.slug === practices[0].slug && <section class="recognition">
-          <h3>Recognition</h3>
-          <div><span>Award artwork placeholder</span><span>Award artwork placeholder</span><span>Award artwork placeholder</span></div>
-        </section>}
-      </article>
-    </section>
-  </>}
-  {page.type === 'news' && <article class="article-page wrap prose">
-    <h1>{page.item.title}</h1>
-    <time datetime={page.item.date}>{formatDate(page.item.date)}</time>
-    {page.item.photo && <figure class="photo-block"><img src={url('assets/' + page.item.photo + '.webp')} alt="" /><figcaption class="image-note">Article image placeholder</figcaption></figure>}
-    <p>{page.item.summary}</p>
-    <p>Article body placeholder. This page is reserved for the approved full article.</p>
-    <nav class="article-nav" aria-label="News articles">
-      <a href={url('news-events/')}>All news and events</a>
-      {news.findIndex(item => item.slug === page.item.slug) < news.length - 1 && <a href={url(news[news.findIndex(item => item.slug === page.item.slug) + 1].slug + '/')}>Older article →</a>}
-    </nav>
-  </article>}
+  <article class="wrap interior prose">
+    <a class="back-link" href={url(section.path)}>{section.label}</a>
+    <h1>{title}</h1>
+    <p class="lede">{page.item.summary}</p>
+    {page.kind === 'practice' ? <>
+      <h2>Examples of matters</h2>
+      <ul>{page.item.examples.map(example => <li>{example}</li>)}</ul>
+      <h2>What to prepare</h2>
+      <p>{page.item.prepare}</p>
+      <a class="button" href={url('contact/')}>Contact</a>
+    </> : <>
+      {page.item.image && <img class="workshop-image article-image" src={url('assets/' + page.item.image.file)} alt={page.item.image.alt} decoding="async" />}
+      {page.item.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+    </>}
+  </article>
 </Site>

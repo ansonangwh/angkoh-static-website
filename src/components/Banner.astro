@@ -1,9 +1,0 @@
----
-import { url } from '../content';
-interface Props { variant: string; photo?: string }
-const { variant, photo } = Astro.props;
----
-<div class:list={['banner', 'banner-' + variant]}>
-  {photo && <img src={url('assets/' + photo + '.webp')} alt="" fetchpriority="high" />}
-  {photo && <span class="image-note">Image placeholder</span>}
-</div>

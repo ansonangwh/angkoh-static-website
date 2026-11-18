@@ -1,65 +1,69 @@
 export const url = (path = '') =>
   import.meta.env.BASE_URL.replace(/\/$/, '') + '/' + path.replace(/^\/+/, '');
 
-export const partners = [
-  {
-    slug: 'amos-ho-chern-wey', name: 'Partner One', area: 'Dispute Resolution',
-    paragraphs: [
-      'This sample biography introduces the lead for litigation and dispute resolution. It is a placeholder for the approved profile.',
-      'The reference profile sets out experience across court levels, with an emphasis on civil and commercial litigation.',
-      'The profile also includes practice highlights, excerpts from directory commentary, languages and professional qualifications.',
-    ],
-    topics: ['Trial & Advocacy', 'Manufacturing', 'Town Planning & Development', 'Commercial Disputes', 'Tort & Professional Negligence', 'Credit & Finance', 'Employment'],
-  },
-  {
-    slug: 'joe-sew-chin-cheung', name: 'Partner Two', area: 'Conveyancing, Commercial & Corporate',
-    paragraphs: [
-      'This sample biography introduces a partner in property transactions and commercial law. It is a placeholder for the approved profile.',
-      'The reference profile describes legal training and professional experience in conveyancing, real estate and advisory work.',
-    ],
-    topics: [],
-  },
-  {
-    slug: 'calvin-kiew-wing-khong', name: 'Partner Three', area: 'Conveyancing, Commercial & Corporate',
-    paragraphs: [
-      'This sample biography introduces a partner in real estate and corporate transactions. It is a placeholder for the approved profile.',
-      'The reference profile discusses property sales, development projects and leasing across residential, retail and commercial properties.',
-      'Its corporate section covers share transactions and general advisory work.',
-    ],
-    topics: [],
-  },
+export const navigation = [
+  { label: 'About', path: 'about-us/' },
+  { label: 'Practice Areas', path: 'practice-areas/' },
+  { label: 'People', path: 'our-partners/' },
+  { label: 'News & Events', path: 'news-events/' },
 ];
 
 export const practices = [
   {
-    slug: 'practice-area-dispute-resolution', label: 'Dispute Resolution', name: 'Dispute Resolution',
-    paragraphs: ['This practice covers civil and business disputes before Malaysian courts and tribunals. The topics below show where approved descriptions of the firm’s work would appear.'],
-    services: ['Commercial contracts', 'Employment matters', 'Personal and business insolvency', 'Planning and development', 'Company and shareholder disputes', 'Estate administration', 'Defamation', 'Judicial review', 'Land disputes', 'Professional negligence'],
+    slug: 'business-disputes',
+    name: 'Business disputes',
+    summary: 'Organise the facts, identify what is at stake, and prepare for a conversation about your options.',
+    examples: ['Unpaid invoices and disputed obligations', 'Disagreements over commercial agreements', 'Disputes between business owners'],
+    prepare: 'Gather the relevant agreements, correspondence, and a short timeline. Flag any deadlines in letters or court documents.',
   },
   {
-    slug: 'practice-area-conveyancing', label: 'Conveyancing', name: 'Conveyancing, Commercial & Corporate',
-    paragraphs: ['This practice covers real estate transactions and legal work for businesses.', 'The list below outlines the types of matters this page is designed to describe.'],
-    services: ['Residential and commercial property transfers', 'Leases and tenancies', 'Real estate developments', 'Loan and financing documentation', 'Business agreements', 'Share transactions and corporate advisory'],
+    slug: 'property-transactions',
+    name: 'Property transactions',
+    summary: 'Get your documents and questions in order before buying, selling, or leasing property.',
+    examples: ['Buying or selling a property', 'Reviewing lease terms', 'Planning a property transaction around financing and completion dates'],
+    prepare: 'Bring any offer, draft contract, financing documents, and a list of the dates you are working towards.',
+  },
+  {
+    slug: 'commercial-agreements',
+    name: 'Commercial agreements',
+    summary: 'Identify the obligations, decisions, and open questions behind a proposed agreement.',
+    examples: ['Supply and services agreements', 'New business arrangements', 'Changes to existing contracts'],
+    prepare: 'Write down each party’s responsibilities and the commercial terms already agreed. Bring any draft and mark clauses that need discussion.',
   },
 ];
 
-export const news = [
-  { slug: '2024/02/26/kuala-lumpur-high-court-dismissed-judgment-creditors-second-attempt-to-commence-judgment-debtor-summons', title: 'High Court dismisses a second application for a judgment debtor summons', date: '2024-02-26', summary: 'The case concerned a creditor’s attempt to begin another round of judgment debtor proceedings.' },
-  { slug: '2024/02/26/thomson-reuters-alb-law-awards-2024', title: '2024 Malaysian legal awards announcement', date: '2024-02-26', summary: 'This entry corresponds to the reference site’s announcement about the 2024 award finalist selections.', photo: 'conference' },
-  { slug: '2024/02/26/kuala-lumpur-high-court-handed-down-judgment-in-huat-hing-rubberwood-sdn-bhd-v-goodnite-sdn-bhd-2024', title: 'High Court issues judgment in a commercial trial', date: '2024-02-26', summary: 'This update concerns a contested commercial case decided after a trial in Kuala Lumpur.' },
-  { slug: '2021/12/18/high-court-affirms-solicitors-liabilities-for-representing-an-imposter', title: 'High Court upholds liability in a case involving an impersonator', date: '2021-12-18', summary: 'On appeal, the High Court reviewed liability arising from solicitors’ dealings with an impersonator.' },
-  { slug: '2021/11/16/high-court-ordered-developer-to-refund-payments-to-purchaser-after-termination-of-sale-and-purchase-agreements', title: 'High Court orders partial repayment after property contracts end', date: '2021-11-16', summary: 'A purchaser sought to recover part of the purchase price after the sale agreements ended.' },
-  { slug: '2021/09/10/high-court-upheld-the-right-to-restitution-under-the-principle-of-patel-v-mirza', title: 'High Court considers restitution under Patel v. Mirza', date: '2021-09-10', summary: 'The court considered a restitution claim involving allegations of unlicensed moneylending.' },
-  { slug: '2021/01/26/we-are-a-set-of-law-firm-located-in-the-heart-of-kuala-lumpur-2', title: 'Federal Court declines a creditor’s application for leave', date: '2021-01-26', summary: 'A creditor sought leave after an unsuccessful attempt to recover a guaranteed sum.' },
-];
-
-export const formatDate = (date: string) =>
-  new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(date));
-
-export const navigation = [
-  { label: 'About Us', slug: 'about-us' },
-  { label: 'Lawyers', slug: 'our-partners', children: partners.map(({ name, slug }) => ({ label: name, slug })) },
-  { label: 'Practice Areas', slug: 'practice-areas', children: practices },
-  { label: 'News & Events', slug: 'news-events' },
-  { label: 'Contact', slug: 'contact' },
+export const updates = [
+  {
+    kind: 'news',
+    slug: 'prepare-for-a-first-meeting',
+    title: 'What to bring to a first meeting',
+    summary: 'A short checklist for organising documents, dates, and questions before you meet a lawyer.',
+    paragraphs: [
+      'Write a timeline in date order. Add an entry for each important conversation, letter, or document, and mark any dates you are unsure about.',
+      'Collect the original documents and put related emails or messages together. Keep the full conversation so the reader can see the context.',
+      'List what you want to find out at the meeting. Mention any upcoming deadline at the start so it can be discussed early.',
+    ],
+  },
+  {
+    kind: 'news',
+    slug: 'planning-a-contract-review',
+    title: 'Planning a contract review',
+    summary: 'Three things to prepare before asking for feedback on a draft agreement.',
+    paragraphs: [
+      'Gather the latest draft and any schedules it mentions. If there are several versions, mark the one everyone should review.',
+      'Write down the commercial points already agreed and the remaining decisions. Flag clauses that affect delivery, payment, or cancellation.',
+      'Share any date the parties are working towards so the review can be planned around it.',
+    ],
+  },
+  {
+    kind: 'event',
+    slug: 'small-business-contract-workshop',
+    image: { file: 'workshop-table.webp', alt: 'Hands taking notes on worksheets around a meeting table' },
+    title: 'Small business contract workshop',
+    summary: 'A sample session on turning a business agreement into a clear list of obligations and deadlines.',
+    paragraphs: [
+      'This is an example event listing. Registration and attendance are unavailable for this sample.',
+      'The proposed session uses a fictional supplier agreement to practise identifying deliverables, payment dates, and decisions that need clarification.',
+    ],
+  },
 ];

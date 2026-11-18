@@ -1,13 +1,30 @@
 ---
 import Site from '../layouts/Site.astro';
-import Banner from '../components/Banner.astro';
-import NewsCards from '../components/NewsCards.astro';
-import { news } from '../content';
+import { updates, url } from '../content';
+
+const sections = [
+  { key: 'news', title: 'From the journal' },
+  { key: 'event', title: 'Events' },
+];
 ---
 <Site title="News & Events">
-  <Banner variant="news" />
-  <section class="news-section wrap">
-    <h1>Latest News</h1>
-    <NewsCards items={news} />
-  </section>
+  <div class="wrap interior updates-page">
+    <header class="updates-intro">
+      <h1>News &amp; Events</h1>
+      <p>Practical reading and sample events for businesses and individuals.</p>
+    </header>
+    <div class="updates-grid">
+      {sections.map(section => <section aria-labelledby={section.key + '-heading'}>
+        <h2 id={section.key + '-heading'}>{section.title}</h2>
+        <ul class="updates-list">
+          {updates.filter(item => item.kind === section.key).map(item => <li>
+            {item.image && <img class="workshop-image" src={url('assets/' + item.image.file)} alt={item.image.alt} loading="lazy" decoding="async" />}
+            {item.kind === 'event' && <p class="event-status">Example event · Registration unavailable</p>}
+            <h3><a href={url('news-events/' + item.slug + '/')}>{item.title}<span class="chevron" aria-hidden="true"></span></a></h3>
+            <p>{item.summary}</p>
+          </li>)}
+        </ul>
+      </section>)}
+    </div>
+  </div>
 </Site>

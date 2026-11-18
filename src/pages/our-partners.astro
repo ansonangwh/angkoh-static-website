@@ -1,19 +1,49 @@
 ---
 import Site from '../layouts/Site.astro';
-import Banner from '../components/Banner.astro';
-import { partners, url } from '../content';
+import { practices, url } from '../content';
+
+const people = [
+  {
+    name: 'Adrian Tan',
+    initials: 'AT',
+    role: 'Partner',
+    practice: practices[0],
+    bio: 'Adrian helps businesses get to grips with contract disputes and disagreements between owners. He starts by mapping the facts, deadlines, and options for resolving the matter.',
+  },
+  {
+    name: 'Maya Lim',
+    initials: 'ML',
+    role: 'Senior Associate',
+    practice: practices[1],
+    bio: 'Maya works with clients buying, selling, or leasing property. She helps them understand the paperwork, agree on key dates, and prepare for completion.',
+  },
+  {
+    name: 'Daniel Wong',
+    initials: 'DW',
+    role: 'Associate',
+    practice: practices[2],
+    bio: 'Daniel drafts and reviews commercial agreements. He helps clients turn agreed business terms into clear responsibilities and identify points that still need negotiation.',
+  },
+];
 ---
-<Site title="Lawyers">
-  <Banner variant="partners" />
-  <section class="interior wrap partners">
-    <h1 class="eyebrow">Partners</h1>
-    <div class="partner-grid">
-      {partners.map(partner => <a class="partner-card" href={url(partner.slug + '/')}>
-        <div class="portrait"><span>Portrait placeholder</span></div>
-        <strong>{partner.name}</strong>
-        <span>{partner.area}</span>
-        <small>Qualifications placeholder</small>
-      </a>)}
+<Site title="People">
+  <section class="wrap interior" aria-labelledby="people-heading">
+    <div class="people-intro">
+      <h1 id="people-heading">People</h1>
+      <p>These fictional profiles show how the Ang &amp; Koh team directory could look.</p>
     </div>
+    <ul class="people-grid">
+      {people.map(person => <li class="person-card" id={person.name.toLowerCase().replaceAll(" ", "-")}>
+        <div class="person-mark" aria-hidden="true">{person.initials}</div>
+        <div class="person-details">
+          <p class="person-role">{person.role}</p>
+          <h2>{person.name}</h2>
+          <p>{person.bio}</p>
+          <a class="person-practice" href={url('practice-areas/' + person.practice.slug + '/')}>
+            {person.practice.name}<span class="chevron" aria-hidden="true"></span>
+          </a>
+        </div>
+      </li>)}
+    </ul>
   </section>
 </Site>

@@ -1,0 +1,6 @@
+---
+import { practices, url } from '../content';
+---
+<ul class="practice-list">
+  {practices.map(practice => <li><a href={url('practice-areas/' + practice.slug + '/')}><div><strong>{practice.name}</strong><p>{practice.summary}</p></div><span class="chevron" aria-hidden="true"></span></a></li>)}
+</ul>

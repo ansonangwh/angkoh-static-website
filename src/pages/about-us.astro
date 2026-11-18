@@ -1,18 +1,18 @@
 ---
 import Site from '../layouts/Site.astro';
-import Banner from '../components/Banner.astro';
 import { url } from '../content';
 ---
-<Site title="About Us">
-  <Banner variant="about" photo="books" />
-  <section class="interior wrap split about">
+<Site title="About">
+  <section class="wrap interior about-layout">
     <div class="prose">
-      <h1 class="eyebrow">About Us</h1>
-      <p>This sample firm overview is set in Kuala Lumpur. It follows the reference page’s introduction to the firm and the services it offers.</p>
-      <p>The site presents two departments. One handles civil and commercial disputes. The other covers real estate, business transactions and corporate advisory.</p>
-      <p>This space is reserved for approved text about how the partners work together and assist clients.</p>
-      <p>Visit the <a href={url('practice-areas/')}>practice areas</a> section for both department pages, or see the <a href={url('our-partners/')}>partners</a> page.</p>
+      <h1>About Ang &amp; Koh</h1>
+      <p>This website concept shows how a firm can explain its services, introduce its people, and help visitors prepare for a first conversation.</p>
+      <p>The firm’s approved background, office location, and approach to client work will be added once supplied.</p>
+      <a class="text-link" href={url('practice-areas/')}>Explore sample practice areas</a>
     </div>
-    <figure class="photo-block"><img src={url('assets/conference.webp')} alt="" loading="lazy" /><figcaption class="image-note">Office image placeholder</figcaption></figure>
+    <figure class="about-figure">
+      <img src={url('assets/office-atrium.webp')} alt="Daylight falling across timber fins and a limestone wall in a contemporary atrium" decoding="async" />
+      <figcaption>Illustrative interior</figcaption>
+    </figure>
   </section>
 </Site>
