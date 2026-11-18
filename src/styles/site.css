@@ -158,7 +158,6 @@ textarea { resize: vertical; }
 @media (hover: hover) {
   a:hover { color: var(--gold); }
   .button:hover { background-color: var(--ink); color: var(--chrome); }
-  .person-practice:hover { color: var(--ink); }
 
   @media (prefers-reduced-motion: no-preference) {
     a { transition: color 150ms ease, background-color 150ms ease; }
@@ -205,24 +204,6 @@ textarea { resize: vertical; }
 @media (max-width: 760px) {
   .about-layout { grid-template-columns: minmax(0, 1fr); }
   .about-figure img { aspect-ratio: 4 / 3; }
-}
-
-.newsletter {
-  display: grid;
-  grid-template-columns: 1fr minmax(0, 28rem);
-  align-items: center;
-  gap: 20px;
-  padding-block: clamp(26px, 4vw, 46px);
-  border-bottom: 1px solid var(--line);
-}
-.newsletter h2 { margin-bottom: 5px; }
-.newsletter p { margin: 0; color: var(--muted); }
-.newsletter label { display: block; margin-bottom: 5px; font-size: .9rem; }
-.newsletter-row { display: flex; gap: 8px; }
-.newsletter-row input { min-width: 0; }
-.newsletter-row .button:disabled { background: var(--surface); border-color: var(--line); color: var(--muted); cursor: default; text-decoration: none; }
-@media (max-width: 760px) {
-  .newsletter { grid-template-columns: 1fr; }
 }
 
 .office-details { font-style: normal; }

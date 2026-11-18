@@ -1,6 +1,6 @@
 ---
 import Site from '../layouts/Site.astro';
-import { practices, url } from '../content';
+import { practices } from '../content';
 
 const people = [
   {
@@ -39,9 +39,7 @@ const people = [
           <p class="person-role">{person.role}</p>
           <h2>{person.name}</h2>
           <p>{person.bio}</p>
-          <a class="person-practice" href={url('practice-areas/' + person.practice.slug + '/')}>
-            {person.practice.name}<span class="chevron" aria-hidden="true"></span>
-          </a>
+          <p class="person-practice">{person.practice.name}</p>
         </div>
       </li>)}
     </ul>

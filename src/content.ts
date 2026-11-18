@@ -66,4 +66,37 @@ export const updates = [
       'The proposed session uses a fictional supplier agreement to practise identifying deliverables, payment dates, and decisions that need clarification.',
     ],
   },
+  {
+    kind: 'event',
+    slug: 'property-purchase-briefing',
+    title: 'Preparing for a property purchase',
+    summary: 'A sample briefing on organising purchase documents, financing questions, and key dates.',
+    paragraphs: [
+      'This is an example event listing. Registration and attendance are unavailable for this sample.',
+      'Designed for first-time buyers, this proposed briefing follows a fictional purchase from the initial offer to completion.',
+      'Participants would work through a document checklist and prepare questions to discuss with their lawyer and financing provider.',
+    ],
+  },
+  {
+    kind: 'event',
+    slug: 'business-dispute-roundtable',
+    title: 'Business dispute roundtable',
+    summary: 'A sample discussion on putting together the facts when a commercial relationship breaks down.',
+    paragraphs: [
+      'This is an example event listing. Registration and attendance are unavailable for this sample.',
+      'The proposed roundtable uses fictional scenarios involving unpaid invoices and disagreements over delivery.',
+      'The discussion would focus on organising correspondence, building a timeline, and identifying questions for a first legal consultation.',
+    ],
+  },
+  {
+    kind: 'event',
+    slug: 'commercial-lease-clinic',
+    title: 'Commercial lease preparation clinic',
+    summary: 'A sample session for business owners preparing to discuss a new lease or renewal.',
+    paragraphs: [
+      'This is an example event listing. Registration and attendance are unavailable for this sample.',
+      'This proposed clinic uses a fictional shop tenancy to explore the information a business owner can gather before a lease review.',
+      'Participants would prepare a checklist covering proposed use, fit-out plans, key dates, and terms that need further discussion.',
+    ],
+  },
 ];
